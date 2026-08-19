@@ -43,13 +43,13 @@ public class ProductRepository {
     }
 
     public List<Product> findByMinPrice(double minPrice) {
-        List<Product> products=new ArrayList<>();
+        List<Product> filteredProducts=new ArrayList<>();
         for(Product product:products){
             if(product.getPrice()>=minPrice){
-                products.add(product);
+                filteredProducts.add(product);
             }
         }
-        return products;
+        return filteredProducts;
     }
 
     public int countAllProducts() {

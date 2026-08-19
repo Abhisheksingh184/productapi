@@ -63,7 +63,7 @@ public class ProductController {
     @GetMapping("/count")
     public ResponseEntity<Map<String,Integer>> countProducts(){
         Map<String,Integer> map = new HashMap<>();
-        map.put("totalProducts:",productService.countProducts());
+        map.put("totalProducts",productService.countProducts());
         return ResponseEntity.ok(map);
     }
 
