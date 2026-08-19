@@ -10,10 +10,10 @@ import java.util.List;
  * @author siabhis
  **/
 @Repository
-public class ProductRepository {
+public class ProductRepositoryOld {
 
     private final List<Product> products=new ArrayList<Product>();
-    public ProductRepository() {
+    public ProductRepositoryOld() {
         products.add(new Product(1,"Laptop",2000,4));
         products.add(new Product(2,"Tablet",2000,4));
         products.add(new Product(3,"Desktop",2000,4));

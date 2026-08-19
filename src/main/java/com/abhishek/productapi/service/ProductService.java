@@ -4,7 +4,7 @@ import com.abhishek.productapi.dto.ProductRequest;
 import com.abhishek.productapi.dto.ProductResponse;
 import com.abhishek.productapi.exception.ProductNotFoundException;
 import com.abhishek.productapi.model.Product;
-import com.abhishek.productapi.repository.ProductRepository;
+import com.abhishek.productapi.repository.ProductRepositoryOld;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,8 +16,8 @@ import java.util.List;
 @Service
 public class ProductService {
     private int nextId=5;
-    private final ProductRepository productRepository;
-    public ProductService(ProductRepository productRepository) {
+    private final ProductRepositoryOld productRepository;
+    public ProductService(ProductRepositoryOld productRepository) {
         this.productRepository = productRepository;
     }
 
