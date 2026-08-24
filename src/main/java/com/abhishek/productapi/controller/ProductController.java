@@ -61,10 +61,19 @@ public class ProductController {
         return  ResponseEntity.ok(productService.findProductsByMinPrice(minPrice));
     }
     @GetMapping("/count")
-    public ResponseEntity<Map<String,Integer>> countProducts(){
-        Map<String,Integer> map = new HashMap<>();
+    public ResponseEntity<Map<String,Long>> countProducts(){
+        Map<String,Long> map = new HashMap<>();
         map.put("totalProducts",productService.countProducts());
         return ResponseEntity.ok(map);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> findByNameContainingIgnoreCase(@RequestParam String name){
+
+        List<ProductResponse>response= productService.findByNameContainingIgnoreCase(name);
+        if(response.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(response);
+    }
 }
