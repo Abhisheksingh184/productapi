@@ -1,6 +1,7 @@
 package com.abhishek.productapi.exception;
 
 import com.abhishek.productapi.dto.ErrorResponse;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
@@ -34,5 +35,15 @@ public class GlobalExceptionHandler {
         ErrorResponse response= new ErrorResponse("Product not found", errors);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 
+    }
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> handleConstraintViolationException(ConstraintViolationException e) {
+        Map<String,String> errors = new HashMap<>();
+        e.getConstraintViolations().forEach((error) -> {
+            errors.put(error.getPropertyPath().toString(), error.getMessage());
+
+        });
+        ErrorResponse response= new ErrorResponse("Validation Failed", errors);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }

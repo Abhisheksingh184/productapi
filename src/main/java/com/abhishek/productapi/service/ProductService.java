@@ -7,6 +7,7 @@ import com.abhishek.productapi.model.Product;
 import com.abhishek.productapi.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +83,8 @@ public class ProductService {
         }
         return productsResponse;
     }
+
+
     public List<ProductResponse> findByPriceBetween(double minPrice,double maxPrice) {
         List<ProductResponse> productsResponse=new ArrayList<>();
         for(Product product:productRepository.findByPriceBetween(minPrice,maxPrice)){
@@ -118,6 +121,38 @@ public class ProductService {
             productsResponse.add(mapToResponse(product,"Product fetched successfully"));
         }
         return productsResponse;
+    }
+    public List<ProductResponse>searchByPriceRange(double minPrice,double maxPrice){
+        List<ProductResponse> productsResponse=new ArrayList<>();
+        for(Product product:productRepository.searchByPriceRange(minPrice,maxPrice)){
+            productsResponse.add(mapToResponse(product,"Product fetched successfully"));
+
+        }
+        return productsResponse;
+    }
+    public List<ProductResponse>searchByNameKeyword(String keyword){
+        List<ProductResponse> productsResponse=new ArrayList<>();
+        for(Product product:productRepository.searchByNameKeyword(keyword)){
+            productsResponse.add(mapToResponse(product,"Product fetched successfully"));
+
+        }
+        return productsResponse;
+    }
+    public List<ProductResponse>findLowStockProducts(int quantity) {
+        List<ProductResponse> productsResponse=new ArrayList<>();
+        for(Product product:productRepository.findLowStockProducts(quantity)){
+            productsResponse.add(mapToResponse(product,"Product fetched successfully"));
+
+        }
+        return productsResponse;
+    }
+
+    public Double findAveragePrice(){
+        return productRepository.findAveragePrice();
+    }
+
+    public Double findTotalStockValue(){
+        return productRepository.findTotalStockValue();
     }
 
 

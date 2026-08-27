@@ -2,6 +2,8 @@ package com.abhishek.productapi.repository;
 
 import com.abhishek.productapi.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -15,5 +17,20 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     List<Product> findByPriceBetween(double minPrice, double maxPrice);
     List<Product> findByQuantityLessThan(int quantity);
     List<Product> findByPriceGreaterThanEqualOrderByPriceDesc(double minPrice);
+
+    @Query("select p from Product p where p.price between :minPrice and :maxPrice")
+    List<Product>searchByPriceRange(@Param("minPrice")double minPrice, @Param("maxPrice")double maxPrice);
+
+    @Query("select p from Product p where lower(p.name) like lower(concat('%',:keyWord,'%'))")
+    List<Product>searchByNameKeyword(@Param("keyWord")String keyWord);
+
+    @Query("select p from Product p where p.quantity<:quantity order by p.quantity asc")
+    List<Product>findLowStockProducts(@Param("quantity")int quantity);
+
+    @Query("select avg(price) from Product p")
+    Double findAveragePrice();
+
+    @Query("select sum(p.price*p.quantity) from Product p")
+    Double findTotalStockValue();
 
 }
