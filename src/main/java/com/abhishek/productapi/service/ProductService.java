@@ -148,11 +148,14 @@ public class ProductService {
     }
 
     public Double findAveragePrice(){
-        return productRepository.findAveragePrice();
+        Double value=productRepository.findAveragePrice();
+
+        return value==null?0.0:value;
     }
 
     public Double findTotalStockValue(){
-        return productRepository.findTotalStockValue();
+        Double value=productRepository.findTotalStockValue();
+        return value==null?0.0:value;
     }
 
 

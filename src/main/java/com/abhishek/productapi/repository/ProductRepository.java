@@ -27,10 +27,10 @@ public interface ProductRepository extends JpaRepository<Product,Integer> {
     @Query("select p from Product p where p.quantity<:quantity order by p.quantity asc")
     List<Product>findLowStockProducts(@Param("quantity")int quantity);
 
-    @Query("select avg(price) from Product p")
+    @Query("select avg(p.price) from Product p")
     Double findAveragePrice();
 
-    @Query("select sum(p.price*p.quantity) from Product p")
+    @Query("select SUM(p.price * p.quantity) FROM Product p")
     Double findTotalStockValue();
 
 }
